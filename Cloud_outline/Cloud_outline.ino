@@ -71,6 +71,7 @@ void setup() {
   /* Add setup here */
 }
 
+// define more variables as needed
 uint32_t x=0;
 
 void loop() {
