@@ -37,34 +37,8 @@ Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO
 // Setup a feed called 'photocell' for publishing.
 // Notice MQTT paths for AIO follow the form: <username>/feeds/<feedname>
 Adafruit_MQTT_Publish feedname = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/feedname");
-/*************************** Sketch Code ************************************/
-void setup() {
-  while (!Serial);
-  WiFi.begin(ssid, pass);
-  delay(1000);
-  printWifiStatus();
-  Serial.begin(115200);  
-}
 
-uint32_t x=0;
-
-void loop() {
-  // Ensure the connection to the MQTT server is alive (this will make the first
-  // connection and automatically reconnect when disconnected).  See the MQTT_connect
-  // function definition further below.
-  MQTT_connect();
-  // Now we can publish stuff!
-  Serial.print(F("\nSending photocell val "));
-  Serial.print(x);
-  Serial.print("...");
-  if (! feedname.publish(x++)) {
-    Serial.println(F("Failed"));
-  } else {
-    Serial.println(F("OK!"));
-  }
-  delay(5000);
-}
-
+/*************************** Functions ************************************/
 // Function to connect and reconnect as necessary to the MQTT server.
 // Should be called in the loop function and it will take care if connecting.
 void MQTT_connect() {
@@ -84,11 +58,37 @@ void MQTT_connect() {
   Serial.println("MQTT Connected!");
 }
 
-
 void printWifiStatus() {
   Serial.print("SSID: ");
   Serial.println(WiFi.SSID());
   IPAddress ip = WiFi.localIP(); // Device IP address
   Serial.print("IP Address: ");
   Serial.println(ip);
+}
+/*************************** Sketch Code ************************************/
+void setup() {
+  while (!Serial);
+  WiFi.begin(ssid, pass);
+  delay(1000);
+  printWifiStatus();
+  Serial.begin(115200);
+
+  /* Add setup here */
+}
+
+uint32_t x=0;
+
+void loop() {
+  // Ensure the connection to the MQTT server is alive (this will make the first
+  // connection and automatically reconnect when disconnected).  See the MQTT_connect
+  // function definition further below.
+  MQTT_connect();
+  // Now we can publish stuff!
+
+  /*
+   * Add 
+   * code 
+   * here
+   */
+
 }
