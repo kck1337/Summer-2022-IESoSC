@@ -1,8 +1,8 @@
 #include <SPI.h>
 #include <WiFiNINA.h>
 
-char ssid[] = "MechaNetwork_RA";      // Wifi SSID
-char pass[] = "gentlecar993";       // Wifi password
+char ssid[] = "TP-Link_7F89";      // Wifi SSID
+char pass[] = "weindianBOIS";       // Wifi password
 
 // Initialize the Wifi client
 WiFiSSLClient client;
@@ -16,8 +16,8 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  int x = analogRead(A0);
-  Serial.println(x);
+//  int x = analogRead(A0);
+//  Serial.println(x);
 
 }
 
