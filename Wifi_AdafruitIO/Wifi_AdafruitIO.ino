@@ -1,10 +1,5 @@
 /***************************************************
-  Adafruit MQTT Library WINC1500 Example
-  Adafruit invests time and resources providing this open source code,
-  please support Adafruit and open-source hardware by purchasing
-  products from Adafruit!
-  Written by Limor Fried/Ladyada for Adafruit Industries.
-  MIT license, all text above must be included in any redistribution
+  Adafruit MQTT Library Arduino Nano 33 IoT Example
  ****************************************************/
 #include <SPI.h>
 #include "Adafruit_MQTT.h"
@@ -34,9 +29,8 @@ Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO
 
 /****************************** Feeds ***************************************/
 
-// Setup a feed called 'photocell' for publishing.
 // Notice MQTT paths for AIO follow the form: <username>/feeds/<feedname>
-Adafruit_MQTT_Publish feedname = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/feedname");
+Adafruit_MQTT_Publish feedname = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/<feedname>");
 /*************************** Sketch Code ************************************/
 void setup() {
   while (!Serial);
