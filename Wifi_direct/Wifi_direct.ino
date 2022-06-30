@@ -1,8 +1,8 @@
 #include <SPI.h>
 #include <WiFiNINA.h>
 
-char ssid[] = "TP-Link_7F89";      // Wifi SSID
-char pass[] = "weindianBOIS";       // Wifi password
+char ssid[] = "WIFI_NAME";      // Wifi SSID
+char pass[] = "PASSWORD";       // Wifi password
 
 // Initialize the Wifi client
 WiFiSSLClient client;
