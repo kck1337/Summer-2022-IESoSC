@@ -1,5 +1,5 @@
 /***************************************************
-  Adafruit MQTT Library Arduino Nano 33 IoT Example
+  Adafruit MQTT Library and Arduino Nano 33 IoT for Cloud integration of people counter
  ****************************************************/
 #include <SPI.h>
 #include "Adafruit_MQTT.h"
@@ -87,14 +87,18 @@ void setup() {
 }
 
 void loop() {
-
+  // Track run time to limit data upload rate
   prev_time = millis();
+
+  // Run indefeinte loop 
   while(true){
   // Ensure the connection to the MQTT server is alive (this will make the first
   // connection and automatically reconnect when disconnected).  See the MQTT_connect
   // function definition further below.
   MQTT_connect();
   // Now we can publish stuff!
+
+  // Publish data every 10 seconds
   if(curr_time - prev_time >= 10000){
     if(! laser_cntr.publish(laserCounter)){
       Serial.println(F("Laser update Failed"));
@@ -111,7 +115,7 @@ void loop() {
     prev_time = curr_time;
 
     }
-
+// Laser counter
 Serial.println("-----Laser as laserCounter-----");
   int sensor = TSL2561.readVisibleLux();
   Serial.print("The light value is: ");
@@ -127,8 +131,8 @@ Serial.println("-----Laser as laserCounter-----");
   }
   prevSensor = sensor;
 
+// Peizo counter
   Serial.println("-----Piezo as laserCounter-----");
-
   val = analogRead(knockSensor);
   Serial.print("Piezo sensor value is: ");
   Serial.println(val);
@@ -141,6 +145,8 @@ Serial.println("-----Laser as laserCounter-----");
   }
   prev_val = val;
   delay(100);
+
+  // current time to track run time
   curr_time = millis();
   }
 }
