@@ -33,8 +33,8 @@ Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO
 
 // Setup a feed for publishing.
 // Notice MQTT paths for AIO follow the form: <username>/feeds/<feedname>
-Adafruit_MQTT_Publish feedname = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/<feedname>");
-
+Adafruit_MQTT_Publish laser_cntr = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/laser_cntr");
+Adafruit_MQTT_Publish peizo_cntr = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/peizo_cntr");
 /*************************** Functions ************************************/
 // Function to connect and reconnect as necessary to the MQTT server.
 // Should be called in the loop function and it will take care if connecting.
@@ -68,11 +68,13 @@ uint32_t x=0;
 int knockSensor = A0;
 byte val = 0;
 int Threshold = 7;
-int counter;
+uint32_t laserCounter;
 int prevSensor = 1023;
 int statePin = LOW;
 int prev_val = 3;
-int newcounter;
+uint32_t peizoCounter;
+unsigned long prev_time = 0;
+unsigned long curr_time = 0;
 
 void setup() {
   while (!Serial);
@@ -85,40 +87,60 @@ void setup() {
 }
 
 void loop() {
+
+  prev_time = millis();
+  while(true){
   // Ensure the connection to the MQTT server is alive (this will make the first
   // connection and automatically reconnect when disconnected).  See the MQTT_connect
   // function definition further below.
   MQTT_connect();
   // Now we can publish stuff!
+  if(curr_time - prev_time >= 10000){
+    if(! laser_cntr.publish(laserCounter)){
+      Serial.println(F("Laser update Failed"));
+      }
+    else{
+      Serial.println(F("Laser update OK"));    
+        }
+    if(! peizo_cntr.publish(peizoCounter)){
+      Serial.println(F("Peizo update Failed"));
+      }
+    else{
+      Serial.println(F("Peizo update OK"));    
+        }
+    prev_time = curr_time;
 
-Serial.println("-----Laser as counter-----");
+    }
+
+Serial.println("-----Laser as laserCounter-----");
   int sensor = TSL2561.readVisibleLux();
   Serial.print("The light value is: ");
   Serial.println(TSL2561.readVisibleLux());
 
   if(sensor<1000 and prevSensor>1000){
-    counter = counter+1;
+    laserCounter = laserCounter+1;
     Serial.print("Count of people is: ");
-    Serial.println(counter);
+    Serial.println(laserCounter);
   }
   else{
-    Serial.println(counter);
+    Serial.println(laserCounter);
   }
   prevSensor = sensor;
 
-  Serial.println("-----Piezo as counter-----");
+  Serial.println("-----Piezo as laserCounter-----");
 
   val = analogRead(knockSensor);
   Serial.print("Piezo sensor value is: ");
   Serial.println(val);
 
   if(val >= Threshold and prev_val <= Threshold){
-    newcounter = newcounter + 1;
+    peizoCounter = peizoCounter + 1;
     Serial.println("Knock!");
-    Serial.println(newcounter);
+    Serial.println(peizoCounter);
     delay(100);
   }
   prev_val = val;
   delay(100);
-
+  curr_time = millis();
+  }
 }
