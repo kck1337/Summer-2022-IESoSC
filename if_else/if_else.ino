@@ -4,10 +4,9 @@ void setup() {
    Serial.begin(9600);  // Start Serial Communitcation  
 }
 
-void loop() {
-     if (Serial.available() > 0)  // Check if serial monitor is open
-     {
+void loop() {   
       score = Serial.parseInt();  // Assign the input to variable score
+      if (Serial.available() > 0){  // Check if serial monitor is open
       delay(500);                 // Pause for half a second or 500 ms
       if (score >= 90)            // If score is greater than or equal to 90
       {
