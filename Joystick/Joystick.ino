@@ -16,17 +16,18 @@ void loop() {
   dr = dr * 0.4 + (data1 * 0.6);
   int tr = map(y, 0, 1023, -100, 100);
   tr = tr * 0.4 + (data2 * 0.6);
-  int vec = vector(dr, tr);
-  /* Serial.print(dr);
+//  int vec = vector(dr, tr);
+  Serial.print(dr);
   Serial.print(",");
-  Serial.println(tr); */
-  Serial.println(vec);
+  Serial.println(tr);
+//  Serial.print("\t");
+//  Serial.println(vec);
   delay(1);
 
 }
 
 
 int vector(int dr, int tr){
-  int vec = (1000*dr)+(tr);
+  int vec = (100*dr)+(tr);
   return vec;
   }
