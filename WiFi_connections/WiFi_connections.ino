@@ -8,7 +8,7 @@
 #include <SPI.h>
 #include <WiFiNINA.h>
 
-char ssid[] = "MechaNetwork_RA";      // Wifi SSID
+char ssid[] = "Hotspot_Name";      // Wifi SSID
 char pass[] = "gentlecar993";       // Wifi password
 
 int status = WL_IDLE_STATUS;
