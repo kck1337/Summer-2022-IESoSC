@@ -7,11 +7,16 @@ TM1637 tm(CLK, DIO);
 void setup() {
 //nitialize display
   tm.init();
+
+  // Set Brightness
   tm.set(7);
 }
 
 void loop() {
-for(int i = 0; i<10000;i++) displayNumber(i) ;
+for(int i = 0; i<10000;i++){
+  displayNumber(i) ;
+  delay(1000);
+}
 }
 
 void displayNumber(int num){   
