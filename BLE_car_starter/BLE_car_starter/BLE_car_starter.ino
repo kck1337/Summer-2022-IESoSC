@@ -5,8 +5,8 @@
 //use the ID as serviceUUID and change 1 character and use as charUUID
 //copy the serviceUUID into the serviceUUID JavaScript variable as well
 
-#define serviceUUID "091c623a-06c1-11ed-b939-0242ac120002"
-#define charUUID "191c623a-06c1-11ed-b939-0242ac120002"
+#define serviceUUID "3c5bd4c2-055f-11ed-b939-0242ac120002"
+#define charUUID "4c5bd4c2-055f-11ed-b939-0242ac120002"
 
 //String carName = "Hehe"; //name your car whatever you want
 
@@ -24,13 +24,13 @@ void setup() {
   right.attach(3);
   left.write(90);
   right.write(90);
-//  Serial.begin(9600);
-//  while (!Serial) {};
+  Serial.begin(9600);
+  while (!Serial) {};
   while (!BLE.begin()) {
     Serial.println("Error initializing BLE...");
     delay(2000);
   }
-//  Serial.println("BLE initialized!");
+  Serial.println("BLE initialized!");
   BLE.setLocalName("Hehe"); 
   BLE.setAdvertisedService(moveCar);
   moveCar.addCharacteristic(dir);
@@ -43,18 +43,18 @@ bool centralConnected = false;
 void loop() {
   BLEDevice central = BLE.central();
   if (central && !centralConnected) {
-//    Serial.print("Connected to central: ");
-//    Serial.println(central.address());
+    Serial.print("Connected to central: ");
+    Serial.println(central.address());
     centralConnected = true;
   } else if (!central && centralConnected) {
-//    Serial.println("Disconnected from central.");
+    Serial.println("Disconnected from central.");
     centralConnected = false;
   }
 
   if (central.connected() && central) {
     if (dir.written()) {
-//      Serial.println("BLE received:");
-//      Serial.println(dir.value());
+      Serial.println("BLE received:");
+      Serial.println(dir.value());
       int i = dir.value();
       drive(i);
     }
