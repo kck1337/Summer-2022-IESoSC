@@ -47,6 +47,10 @@ const int R0 = 100000;            // R0 = 100k
 const int pinTempSensor = A0;     // Grove - Temperature Sensor connect to A0
 uint32_t temperature = 0;
 long curr_time, prev_time;
+
+/***************************************************************************/
+
+
 void setup() {
 //  while (!Serial);
   WiFi.begin(ssid, pass);
