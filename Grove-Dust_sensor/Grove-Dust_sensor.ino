@@ -1,4 +1,4 @@
-int pin = 0;
+int pin = 2;
 unsigned long duration;
 unsigned long starttime;
 unsigned long sampletime_ms = 30000;//sampe 30s ;

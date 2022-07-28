@@ -17,15 +17,15 @@
 #endif
 
 /************************* WiFI Setup *****************************/
-char ssid[] = "TP-Link_7F89";     //  your network SSID (name)
-char pass[] = "weindianBOIS";    // your network password (use for WPA, or use as key for WEP)
+char ssid[] = "HOTSPOT1";     //  your network SSID (name)
+char pass[] = "password";    // your network password (use for WPA, or use as key for WEP)
 
 /************************* Adafruit.io Setup *********************************/
 
 #define AIO_SERVER      "io.adafruit.com"
 #define AIO_SERVERPORT  1883
 #define AIO_USERNAME  "kck1337"
-#define AIO_KEY       "aio_gdff338ZnGULFEqJ5mPwu8QZoSQb"
+#define AIO_KEY       "aio_kAaQ54haDVibbLH1RvPX71S5xH7i"
 
 /************ Global State (you don't need to change this!) ******************/
 

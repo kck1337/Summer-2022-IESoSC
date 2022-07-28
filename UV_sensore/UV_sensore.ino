@@ -9,7 +9,7 @@ void loop()
 {
     int sensorValue;
     long  sum=0;
-    for(int i=0;i<1024;i++)// accumulate readings for 1024 times
+    for(int i=0;i<1024;i++)// accumulate readings for 1024 times  
     {
         sensorValue=analogRead(A6);
         sum=sensorValue+sum;
